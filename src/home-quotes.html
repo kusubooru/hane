@@ -25,14 +25,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-ajax
       id="getQuoteAjax"
       auto 
-      url="http://localhost:3001/"
+      url="http://localhost:8081/v1/users"
+      content-type="application/json"
       method="get"
       handle-as="json"
       last-response="{{home}}"></iron-ajax>
 
     <div class="card">
       <h1>Quotes</h1>
-      <blockquote>[[home.message]]</blockquote>
+      <blockquote>
+        <template is="dom-repeat" items="{{home.users}}">
+          <div># <span>{{index}}</span></div>
+          <div>ID: <span>{{item.id}}</span></div>
+          <div>Name: <span>{{item.name}}</span></div>
+        </template>
+      </blockquote>
       <paper-button raised on-tap="getQuote" class="primary">Get a New Quote</paper-button>
     </div>
   </template>
